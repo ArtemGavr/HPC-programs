@@ -1,23 +1,31 @@
-#include <stdio.h>  // Import the printf function
-#include <omp.h>    // Import the OpenMP library functions
+#include <stdio.h>      // printf
+#include <string.h>     // strlen
 
 // Start of program
-int main(){
+int main(void)
+{
+    // A "character array": the letters of the message, one byte each,
+    // followed by an invisible '\0' byte that marks where the text ends.
+    // This is the original message (found with decoder.c), so encoding it
+    // must give back exactly the scrambled text on the exercise sheet.
+    char mymessage[] = "You think your pain and your heartbreak are unprecedented "
+                       "in the history of the world, but then you read.";
 
-   // This is a "character array", consisting of 105 letters in byte form.
-   char mymessage[] = "This is a placeholder of the original message";
+    // Work out the length instead of typing 105 by hand. Two ways:
+    //   sizeof(mymessage) is the size of the whole array in bytes, which
+    //   includes the '\0' at the end, so subtract 1.
+    //   strlen(mymessage) counts characters up to (not including) the '\0'.
+    int n_sizeof = sizeof(mymessage) - 1;
+    int n        = strlen(mymessage);
+    printf("Length: sizeof says %d, strlen says %d\n", n_sizeof, n);
 
-   // The message is encoded by shifting all letters by one, i.e. 
-   // A becomes B, c becomes d and so forth. This shift is easy to implement
-   // in byte form as all you need to do is to add 1 to a character.
-   // To printf a single character, use e.g. 
-   //       printf("%c\n", mymessage[0]);
-   // To printf the whole array do e.g.   (subtle difference between %c and %s)
-   //       printf("%s\n", mymessage);
+    // The MISSING CODE: shift every character up by one (A->B, c->d, ' '->'!').
+    // The loop stops before the '\0', so the end marker survives.
+    for (int i = 0; i < n; i++) {
+        mymessage[i] = mymessage[i] + 1;
+    }
 
-   /* MISSING CODE: for loop over the 105 characters and adding the value 1 to each entry; */
-    
-   printf("%s\n", mymessage); // This prints a character array to screen
+    printf("%s\n", mymessage);   // %s prints characters until it meets '\0'
 
-   return 0; // Exit program
+    return 0;                    // Exit program
 }

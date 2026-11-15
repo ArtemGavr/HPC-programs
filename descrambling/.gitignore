@@ -1,0 +1,14 @@
+# compiled programs
+encoder
+decoder
+decoder_omp
+encoder_threads
+decoder_threads
+frankenstein_timing
+# made by the jobs
+ASCII-Frankenstein.txt
+secret_*.txt
+results_*.csv
+speedup.png
+*.out
+*.err
